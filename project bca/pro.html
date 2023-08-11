@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Image gallery</title>
+	<link rel="stylesheet" href="pro.css">
+    
+</head>
+<body>
+    <div class="full-img" id="fullImgBox" >
+        <img src="images\img1.jpg" id="fullImg">
+        <span onclick="closeFullImg()">X</span>
+        <button id="prevBtn" onclick="prevImage()">Prev</button>
+        <button id="nextBtn" onclick="nextImage()">Next</button>
+    </div>
+	<div class="image-gallery">
+		<img src="cctv14.jpg" onclick="openFullImg(this.src)">
+        <img src="facebook icon.png" onclick="openFullImg(this.src)">
+        <img src="interior.jpg" onclick="openFullImg(this.src)">
+        <img src="cctv14.jpg" onclick="openFullImg(this.src)">
+        <img src="cctv15.jpg" onclick="openFullImg(this.src)">
+        <img src="cctv9.png" onclick="openFullImg(this.src)">
+        <img src="cctv18-remove.png" onclick="openFullImg(this.src)">
+        <img src="cctv8.webp" onclick="openFullImg(this.src)">
+        
+	</div>
+	
+	<script>
+        var fullImgBox = document.getElementById("fullImgBox");
+        var fullImg = document.getElementById("fullImg");
+        var images = document.querySelectorAll(".image-gallery img");
+        var currentIndex = 0;
+
+        function openFullImg(pic){
+            fullImgBox.style.display = "flex";
+            fullImg.src = pic;
+            currentIndex = Array.from(images).findIndex((img) => img.src === pic);
+            updateNavButtons();
+        }
+
+        function closeFullImg(){
+            fullImgBox.style.display = 'none' ;
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            fullImg.src = images[currentIndex].src;
+            updateNavButtons();
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            fullImg.src = images[currentIndex].src;
+            updateNavButtons();
+        }
+
+        function updateNavButtons() {
+            var prevBtn = document.getElementById("prevBtn");
+            var nextBtn = document.getElementById("nextBtn");
+            if (currentIndex === 0) {
+                prevBtn.style.display = "none";
+            } else {
+                prevBtn.style.display = "block";
+            }
+            if (currentIndex === images.length - 1) {
+                nextBtn.style.display = "none";
+            } else {
+                nextBtn.style.display = "block";
+            }
+        }
+    </script>
+    
+</body>
+</html>
