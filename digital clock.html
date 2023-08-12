@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <style>
+            body {
+  font-family: system-ui;
+  background: #f06d06;
+  color: white;
+  text-align: center;
+}
+
+        </style>
+    </head>
+    <body>
+        <div id = "clock" onload="currentTime()"></div>
+
+    </body>
+    <script>
+        function currentTime() {
+  let date = new Date(); 
+  let hh = date.getHours();
+  let mm = date.getMinutes();
+  let ss = date.getSeconds();
+  let session = "AM";
+
+  if(hh === 0){
+      hh = 12;
+  }
+  if(hh > 12){
+      hh = hh - 12;
+      session = "PM";
+   }
+
+    
+   let time = hh + ":" + mm + ":" + ss + " " + session;
+
+  document.getElementById("clock").innerText = time; 
+  let t = setTimeout(function(){  }, 1000);
+}
+
+currentTime();
+
+    </script>
+</html>
